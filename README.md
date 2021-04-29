@@ -1,2 +1,2 @@
 # projects
-Quick Python projects to peform some basic tasks
+Quick projects to peform some basic tasks
