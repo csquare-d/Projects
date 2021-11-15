@@ -1,3 +1,5 @@
 # Projects
-Quick projects to peform some basic tasks.
-Mostly built for performing recon or information gathering utilizing python.
+
+Writeups of forensics labs and some quick programs built to perform basic recon/information gathering utilizing python
+
+
