@@ -1,12 +1,12 @@
 $hostnames=hostname
 Write-Host $hostname
 $Password=ConvertTo-SecureString "bb123#123" -AsPlainText -Force
-New-LocalUser -Name "JTfun" -Password $Password
-Net User "JTfun" /PASSWORDREQ:YES
-New-LocalUser -Name "JTboo" -Password $Password
-Net User "JTboo" /PASSWORDREQ:YES
-Add-LocalGroupMember -Group "Administrators" -Member "JTboo"
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member "JTfun"
+New-LocalUser -Name "CC1" -Password $Password
+Net User "CC1" /PASSWORDREQ:YES
+New-LocalUser -Name "CC2" -Password $Password
+Net User "CC2" /PASSWORDREQ:YES
+Add-LocalGroupMember -Group "Administrators" -Member "CC2"
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "CC1"
 $Domain=(Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 
 if ($Domain -eq $False)
