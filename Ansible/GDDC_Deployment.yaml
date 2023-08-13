@@ -21,7 +21,7 @@
     - name: Deploy Apache Web Server
       hosts: linux_servers
       tasks:
-        - name: Insall Apache Web Server
+        - name: Install Apache Web Server
           apt:
             name: apache2
             state: present
