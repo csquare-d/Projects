@@ -25,13 +25,57 @@
           apt:
             name: apache2
             state: present
+        - name: Start Apache service
+          service:
+            name: apache2
+            state: started  
           loop: "{{ vlans.results }}"
 
     - name: Deploy Linux Workstations
       hosts: linux_workstations
       tasks:
-        - name: Provision Linux Workstation
           # Install required packages and configure the workstation
+        - name: Deploy Linux Host
+          hosts: target_linux_host
+          become: yes
+          tasks:
+            - name: Update package cache
+              apt:
+                update_cache: yes
+              when: ansible_os_family == 'Debian'
+        
+            - name: Install required packages
+              apt:
+                name: "{{ item }}"
+                state: present
+              loop:
+                - package1
+                - package2
+                - package3
+              when: ansible_os_family == 'Debian'
+        
+            - name: Update package cache
+              yum:
+                name: '*'
+                state: latest
+              when: ansible_os_family == 'RedHat'
+        
+            - name: Install required packages
+              yum:
+                name: "{{ item }}"
+                state: present
+              loop:
+                - package1
+                - package2
+                - package3
+              when: ansible_os_family == 'RedHat'
+        
+            - name: Configure firewall rules
+              firewalld:
+                port: 80/tcp
+                permanent: yes
+                state: enabled
+                
           loop: "{{ vlans.results }}"
 
     - name: Deploy Windows 10 Workstations
